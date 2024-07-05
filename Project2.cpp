@@ -6,6 +6,7 @@ operation to perform.
 */
 
 #include<iostream>
+#include<math.h>
 using namespace std;
 int main(){
 int Num1,Num2;
@@ -41,7 +42,7 @@ case '/':
         cout<<Num1<<" / "<<Num2<<" = "<<(Num1/Num2)<<endl;
     break;
 case '^':
-        cout<<Num1<<" ^ "<<Num2<<" = "<<(Num1^Num2)<<endl;
+        cout<<Num1<<" ^ "<<Num2<<" = "<<pow(Num1,Num2)<<endl;
     break;
 
 default:
