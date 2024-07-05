@@ -18,8 +18,6 @@ cin>>Num2;
  char S;
 do
 {
- cout<<"Do you want to perform any operation(Y/N): ";
- cin>>S;
 cout<<"Enter the Operation you Want to Perform: ";
 cin>>C;
 switch (C)
@@ -48,6 +46,8 @@ case '^':
 default:
 cout<<"You are Enter wrong opeartion\nTry again...."<<endl;
     break;
+ cout<<"Do you want to perform any operation(Y/N): ";
+ cin>>S;
 }
     }while (S =='Y');
     
