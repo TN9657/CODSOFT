@@ -48,7 +48,7 @@ default:
 cout<<"You are Enter wrong opeartion\nTry again...."<<endl;
     break;
 }
-    }while (S!='N');
+    }while (S =='Y');
     
 return 0;
 }
