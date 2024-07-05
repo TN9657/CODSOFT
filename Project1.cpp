@@ -14,7 +14,6 @@ random_device rd;
 mt19937 gen(rd());
 uniform_int_distribution<int> distribution(0, size-1);
 int Number=distribution(gen);
-
 int find=1;
 int count=0;
 do{
