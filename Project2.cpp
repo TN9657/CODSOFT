@@ -46,9 +46,9 @@ case '^':
 default:
 cout<<"You are Enter wrong opeartion\nTry again...."<<endl;
     break;
+}
  cout<<"Do you want to perform any operation(Y/N): ";
  cin>>S;
-}
     }while (S =='Y');
     
 return 0;
