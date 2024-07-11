@@ -20,6 +20,7 @@ void create(Task*& head) {
     string Task_name;
     int Priority;
     cout << "Enter the Task Name: ";
+    cin.ignore();
     getline(cin,Task_name);
     cout << "Enter the Priority: ";
     cin >> Priority;
@@ -99,6 +100,7 @@ int main() {
         case 3: {
             string name;
             cout << "Enter the Task Name: ";
+            cin.ignore();
             getline(cin,name);
             del(head, name);
             break;
