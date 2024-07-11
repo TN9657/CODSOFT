@@ -97,12 +97,31 @@ int main(){
   char C;
  do
  {
-  create(head);
+    int choice;
+cout<<"1.Create a Task\n2.Display Task's\n3.Delete Task\nEnter the Choice: ";
+  cin>>choice;
+
+ switch (choice)
+{
+   case 1:
+       create(head);
+       break;
+    case 2:
+        Display(head);
+        break;
+
+    case 3:
+    string name;
+        cout<<"Enter the Task Name: ";
+        cin>>name;
+        del(head,name);
+        break;
+    default:
+    cout<<"Invalid Choice"<<endl;
+  }
   cout<<"Do You Want to add any Other Task(Y/N): ";
   cin>>C;
 
  } while (C=='Y');
- 
-
 return 0;
 }
