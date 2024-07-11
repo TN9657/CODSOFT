@@ -16,7 +16,6 @@ void create(task*head){
     int Priority;
     cout<<"Enter the Task Name: ";
     cin>>Task_name;
-    cout<<"Enter the Priority: "<<endl;
     cout<<"Enter the Priority: ";
     cin>>Priority;
     task* temp=new task(Task_name,Priority);
@@ -26,15 +25,84 @@ void create(task*head){
         return;
     }
     task* temp1=head;
+    // task*temp2;
     while (temp1!=nullptr)
     {
-        
+        if (temp1->Priority<=temp->Priority)
+        {
+            // temp2=temp1;
+            temp1->next=temp;
+            temp->next=temp1->next;
+            return;
+        }
+        else if (temp1->Priority>temp->Priority){
+             temp->next=temp1;
+        }
+        else{
+        temp1=temp1->next;
+        }
     }
     
     
 }
-int main(){
+void Display(task*head){
+    if (head==nullptr)
+    {
+        cout<<"The Stack is Empty"<<endl;
+    }
+    task*temp=head;
+    while (temp!=nullptr)
+    {   cout<<"____________________________________________________"<<endl;
+        cout<<head->Priority<<"|\t"<<head->Task<<endl;
+        cout<<"----------------------------------------------------"<<endl;
+        temp=temp->next;
+    }
+    
+}
 
+void del(task*head,string Name_task){
+    if (head==nullptr)
+    {
+        cout<<"The Stack is Empty"<<endl;
+    }
+    task*tamp=head;
+    task*delnode=nullptr;
+     int find=0;
+     while (tamp!=nullptr && tamp->Task==Name_task)
+     {
+        tamp=tamp->next;
+          if (tamp->Task==Name_task)
+          {
+            find=1;
+            return;
+
+          }
+          
+        }
+           if (find==1)
+           {
+             delnode=tamp;
+            tamp->next=tamp->next->next;
+            delete delnode;
+           }
+           else{
+            cout<<"The Task is not in the Stack"<<endl;
+           }
+           
+           
+     }
+        
+int main(){
+    task*head=nullptr;
+  char C;
+ do
+ {
+  create(head);
+  cout<<"Do You Want to add any Other Task(Y/N): ";
+  cin>>C;
+
+ } while (C=='Y');
+ 
 
 return 0;
 }
