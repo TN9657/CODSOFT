@@ -1,127 +1,115 @@
-#include<iostream>
+#include <iostream>
+#include <string>
+
 using namespace std;
-class task{
-    public:
-string Task;
-int Priority;
-task* next;
-task(string S,int a){
-   Task=S;
-   Priority=a;
-   next=nullptr;
-}
+
+class Task {
+public:
+    string task;
+    int Priority;
+    Task* next;
+
+    Task(string S, int a) {
+        task = S;
+        Priority = a;
+        next = nullptr;
+    }
 };
-void create(task*head){
+
+void create(Task*& head) {
     string Task_name;
     int Priority;
-    cout<<"Enter the Task Name: ";
-    cin>>Task_name;
-    cout<<"Enter the Priority: ";
-    cin>>Priority;
-    task* temp=new task(Task_name,Priority);
-    if (head==nullptr)
-    {
-        head=temp;
+    cout << "Enter the Task Name: ";
+    cin >> Task_name;
+    cout << "Enter the Priority: ";
+    cin >> Priority;
+
+    Task* temp = new Task(Task_name, Priority);
+
+    if (head == nullptr || temp->Priority < head->Priority) {
+        temp->next = head;
+        head = temp;
+    } else {
+        Task* current = head;
+        while (current->next != nullptr && current->next->Priority <= temp->Priority) {
+            current = current->next;
+        }
+        temp->next = current->next;
+        current->next = temp;
+    }
+}
+
+void display(Task* head) {
+    if (head == nullptr) {
+        cout << "The Stack is Empty" << endl;
         return;
     }
-    task* temp1=head;
-    // task*temp2;
-    while (temp1!=nullptr)
-    {
-        if (temp1->Priority<=temp->Priority)
-        {
-            // temp2=temp1;
-            temp1->next=temp;
-            temp->next=temp1->next;
-            return;
-        }
-        else if (temp1->Priority>temp->Priority){
-             temp->next=temp1;
-        }
-        else{
-        temp1=temp1->next;
-        }
+
+    Task* temp = head;
+    while (temp != nullptr) {
+        cout << "____________________________________________________" << endl;
+        cout << temp->Priority << "|\t" << temp->task << endl;
+        cout << "----------------------------------------------------" << endl;
+        temp = temp->next;
     }
-    
-    
-}
-void Display(task*head){
-    if (head==nullptr)
-    {
-        cout<<"The Stack is Empty"<<endl;
-    }
-    task*temp=head;
-    while (temp!=nullptr)
-    {   cout<<"____________________________________________________"<<endl;
-        cout<<head->Priority<<"|\t"<<head->Task<<endl;
-        cout<<"----------------------------------------------------"<<endl;
-        temp=temp->next;
-    }
-    
 }
 
-void del(task*head,string Name_task){
-    if (head==nullptr)
-    {
-        cout<<"The Stack is Empty"<<endl;
+void del(Task*& head, string Name_task) {
+    if (head == nullptr) {
+        cout << "The Stack is Empty" << endl;
+        return;
     }
-    task*tamp=head;
-    task*delnode=nullptr;
-     int find=0;
-     while (tamp!=nullptr && tamp->Task==Name_task)
-     {
-        tamp=tamp->next;
-          if (tamp->Task==Name_task)
-          {
-            find=1;
-            return;
 
-          }
-          
+    Task* prev = nullptr;
+    Task* current = head;
+    while (current != nullptr && current->task != Name_task) {
+        prev = current;
+        current = current->next;
+    }
+
+    if (current == nullptr) {
+        cout << "The Task is not in the Stack" << endl;
+        return;
+    }
+
+    if (prev == nullptr) {
+        head = current->next;
+    } else {
+        prev->next = current->next;
+    }
+    delete current;
+}
+
+int main() {
+    Task* head = nullptr;
+    char C;
+
+    do {
+        int choice;
+        cout << "1. Create a Task\n2. Display Task's\n3. Delete Task\nEnter the Choice: ";
+        cin >> choice;
+
+        switch (choice) {
+        case 1:
+            create(head);
+            break;
+        case 2:
+            display(head);
+            break;
+        case 3: {
+            string name;
+            cout << "Enter the Task Name: ";
+            cin >> name;
+            del(head, name);
+            break;
         }
-           if (find==1)
-           {
-             delnode=tamp;
-            tamp->next=tamp->next->next;
-            delete delnode;
-           }
-           else{
-            cout<<"The Task is not in the Stack"<<endl;
-           }
-           
-           
-     }
-        
-int main(){
-    task*head=nullptr;
-  char C;
- do
- {
-    int choice;
-cout<<"1.Create a Task\n2.Display Task's\n3.Delete Task\nEnter the Choice: ";
-  cin>>choice;
+        default:
+            cout << "Invalid Choice" << endl;
+        }
 
- switch (choice)
-{
-   case 1:
-       create(head);
-       break;
-    case 2:
-        Display(head);
-        break;
+        cout << "Do You Want to add any Other Task(Y/N): ";
+        cin >> C;
+    } while (C == 'Y');
 
-    case 3:
-    string name;
-        cout<<"Enter the Task Name: ";
-        cin>>name;
-        del(head,name);
-        break;
-    default:
-    cout<<"Invalid Choice"<<endl;
-  }
-  cout<<"Do You Want to add any Other Task(Y/N): ";
-  cin>>C;
-
- } while (C=='Y');
-return 0;
+    return 0;
 }
