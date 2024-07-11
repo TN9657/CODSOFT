@@ -109,7 +109,7 @@ int main() {
 
         cout << "Do You Want to add any Other Task(Y/N): ";
         cin >> C;
-    } while (C == 'Y');
+    } while (C == 'Y' || C=='y');
 
     return 0;
 }
