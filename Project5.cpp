@@ -56,8 +56,8 @@ void searchBook() {
     bool found = false;
     for (const auto& book : bookDatabase) {
         if (book.title == query || book.author == query || book.ISBN == query) {
-            cout << "Book found: " << book.title << " by " << book.author << ", ISBN: " << book.ISBN << (book.isAvailable ? " (Available)" : " (Checked out)") << endl;
-            found = true;
+         cout << "Book found: " << book.title << " by " << book.author << ", ISBN: " << book.ISBN << (book.isAvailable ? " (Available)" : " (Checked out)") << endl;
+          found = true;
         }
     }
     if (!found) {
@@ -77,8 +77,7 @@ void checkOutBook() {
         if (book.ISBN == ISBN && book.isAvailable) {
             book.isAvailable = false;
             time_t now = time(0);
-            book.dueDate = now + 7 * 24 * 60 * 60; // Due in 7 days
-
+            book.dueDate = now + 30 * 24 * 60 * 60; 
             bool borrowerFound = false;
             for (auto& borrower : borrowerDatabase) {
                 if (borrower.name == borrowerName) {
@@ -95,6 +94,7 @@ void checkOutBook() {
             }
 
             cout << "Book checked out successfully!" << endl;
+            cout<<"Coution: If you cannot Return the book in 30 days\nYou will have to pay fine for it......."<<endl;
             return;
         }
     }
