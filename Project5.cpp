@@ -114,7 +114,7 @@ void returnBook() {
             time_t now = time(0);
             double overdueDays = difftime(now, book.dueDate) / (60 * 60 * 24);
             if (overdueDays > 0) {
-                cout << "Book is overdue by " << overdueDays << " days. Fine: $" << fixed << setprecision(2) << overdueDays * 0.50 << endl;
+                cout << "Book is overdue by " << overdueDays << " days.  Fine: $" << fixed << setprecision(2) << overdueDays * 0.50 << endl;
             } else {
                 cout << "Book returned on time." << endl;
             }
